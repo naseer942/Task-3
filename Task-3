@@ -1,0 +1,83 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df=pd.read_csv("householdtask3 - Copy.csv")
+df.head()
+#checking for null values 
+df.isnull().sum()
+#creating bar charts
+#Bar chart 1
+plt.figure(figsize=(5,4))
+plt.bar(df['year'],df['tot_hhs'],color="blue")
+
+#Customising the chart with label,titles and legend
+plt.title("Total Households by Year")
+plt.xlabel("Year")
+plt.ylabel("Total Households")
+
+#Display the bar chart 
+plt.show()
+ #Bar chart-2
+plt.figure(figsize=(5,3))
+
+#Horizontal bar chart 
+bar_chart_2=plt.barh(['Income', 'Expenditure'], [df['income'].sum(), df['expenditure'].sum()], color='cyan')
+
+#Customising the chart with label,titles and legend
+plt.title("Total Income and Expenditure")
+plt.xlabel("Amount")
+plt.ylabel("Category")
+
+#Display the bar chart 
+plt.show()
+ #Bar chart 3
+plt.figure(figsize=(3,4))
+bar_chart_3=plt.bar(['eqv_income','eqv_exp'],[df['eqv_income'].sum(),df['eqv_exp'].sum()],color='purple')
+
+#Customising the chart with label,titles and legend
+plt.title("Total Equivalent Income and Expenditure")
+plt.xlabel("Category")
+plt.ylabel("Amount")
+
+#Display the bar chart 
+plt.show()
+ #creating line charts
+# Create a line chart for income and expenditure over time
+plt.figure(figsize=(10,6))
+
+plt.plot(df['year'],df['income'],label='Income')
+plt.plot(df['year'], df['expenditure'], label='Expenditure')
+
+plt.title("Income and Expenditure over Time")
+plt.xlabel("Year")
+plt.ylabel("Amount")
+plt.legend(loc='upper right')
+
+plt.show()
+[01/09, 6:45 pm] Usha 👓: #calculating average income and expenditure by year
+avg_income=df.groupby('year')['income'].mean()
+avg_expenditure=df.groupby('year')['expenditure'].mean()
+
+plt.figure(figsize=(10,6))
+
+plt.plot(avg_income.index, avg_income.values, label='Average Income')
+plt.plot(avg_expenditure.index, avg_expenditure.values, label='Average Expenditure')
+
+plt.title("Average Income and Expenditure by Year")
+plt.xlabel("Year")
+plt.ylabel("Average Amount")
+plt.legend(loc='upper right')
+
+plt.show()
+#Total Households and Owned Households over Time
+plt.figure(figsize=(10,6))
+
+plt.plot(df['year'],df['tot_hhs'],label='Total Households') 	
+plt.plot(df['year'],df['own'],label='owned Households') 	
+
+plt.title("Total Households and Owned Households over Time")
+plt.xlabel("Year")
+plt.ylabel("Number of Households")
+plt.legend(loc='upper right')
+
+plt.show()
